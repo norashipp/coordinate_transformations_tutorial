@@ -22,22 +22,23 @@ from uncertainties import unumpy
 #################################
 ## UPDATE DIRECTORY NAMES HERE ##
 #################################
-input_dir = '/project/projectdirs/theory/ianmoult/mw_potential_clean/mw_potential/data/'
-data_dir = '/project/projectdirs/theory/lnecib/mw_potential/data/'
-output_file = 'gaia_dr3_velocities.pkl'
+input_dir = './data/'
+data_dir = './data'
+input_file = 'gaia_dr2_test_file.csv'
+output_file = 'gaia_dr2_velocities.pkl'
 
 print('input_dir = %s' % input_dir)
 print('data_dir = %s' % data_dir)
 print('outfile = %s' % output_file)
 
-#######################
+############################################
 
 print()
 print('Loading data...')
 ######################
 # CHECK COLUMN NAMES #
 ######################
-dataset = pd.read_csv(input_dir + 'gaia_dr2_all.csv', usecols=['source_id', 'ra', 'dec', 'pmra', 'pmra_error', 'parallax', 'parallax_error', 'l', 'b', 'pmdec',
+dataset = pd.read_csv(input_dir + input_file, usecols=['source_id', 'ra', 'dec', 'pmra', 'pmra_error', 'parallax', 'parallax_error', 'l', 'b', 'pmdec',
                                                                'pmdec_error', 'rv_template_fe_h', 'pmra_pmdec_corr', 'parallax_pmra_corr', 'parallax_pmdec_corr', 'radial_velocity', 'radial_velocity_error', 'parallax_over_error'])
 print('%i rows' % len(dataset))
 
@@ -50,7 +51,7 @@ print('%i rows' % len(dataset))
 dataset.drop(broken, inplace=True)
 print('%i rows' % len(dataset))
 
-#######################
+############################################
 
 print()
 print('Organizing data...')
@@ -95,7 +96,7 @@ vr_all = unumpy.uarray(vrad, vrad_errors)
 feH = dataset['rv_template_fe_h'].values
 
 
-##################################
+############################################
 
 print()
 print('Converting coordinates...')
@@ -133,6 +134,8 @@ z_err = unumpy.std_devs(z_list_error)
 
 radial_dis = np.linalg.norm([x, y, z], axis=0)
 radial_err = (np.abs(x * x_err) + np.abs(y * y_err) + np.abs(z * z_err)) / radial_dis
+
+############################################
 
 # vU, vV, vW
 print()
@@ -269,6 +272,8 @@ for i in range(len(dec)):
 
 print('Max absolute velocity = %.1f km/s' % (np.max(vabs)))
 
+############################################
+
 print()
 print('Calculating v_r, v_theta, v_phi...')
 
@@ -292,7 +297,7 @@ vr_std = unumpy.std_devs(vr)
 vtheta_std = unumpy.std_devs(vtheta)
 vphi_std = unumpy.std_devs(vphi)
 
-#################################
+############################################
 
 print()
 print('Saving data...')
