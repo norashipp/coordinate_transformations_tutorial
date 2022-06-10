@@ -23,7 +23,7 @@ from uncertainties import unumpy
 ## UPDATE DIRECTORY NAMES HERE ##
 #################################
 input_dir = './data/'
-data_dir = './data'
+data_dir = './data/'
 input_file = 'gaia_dr2_test_file.csv'
 output_file = 'gaia_dr2_velocities.pkl'
 
