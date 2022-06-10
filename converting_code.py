@@ -71,6 +71,8 @@ b = dataset['b'].values
 
 # DISTANCE
 parallax = dataset['parallax'].values
+parallax_cut = np.isfinite(parallax) & (parallax > 0) # Remove invalid parallaxes
+parallax[~parallax_cut] = np.nan
 distance = 1.0 / parallax
 parallax_err = dataset['parallax_error'].values
 distance_err = abs(parallax_err / parallax**2)
