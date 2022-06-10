@@ -282,7 +282,7 @@ phi = np.arctan2(y, x)
 theta = np.arccos(z / r)
 
 r_helio = np.linalg.norm(np.transpose([x + rSun, y, z]), axis=1)
-print('r_helio = %.1f kpc' % r_helio)
+print('r_helio min, max = %.1f, %.1f kpc' % (np.min(r_helio), np.max(r_helio)))
 
 # Velocities
 vr = np.array(vU_shifted * np.cos(phi) * np.sin(theta) + vV_shifted * np.sin(phi) * np.sin(theta) + vW_shifted * np.cos(theta))
